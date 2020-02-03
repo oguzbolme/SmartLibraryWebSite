@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .font-style {
+        font-family: sans-serif;
+        font-weight: bold;
+        color: black;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    img {
+        width: 220px;
+        height: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+
+    h2 {
+        text-align: center;
+        font-family: sans-serif;
+        font-weight: bold;
+        color: black;
+    }
+</style>
+
+<form asp-controller="Book" asp-action="SearchBook" method="post" style="margin:20px;padding:20px;" class="w3-container w3-light-grey w3-round font-style">
+    <select class="w3-select" name="type" required>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+    </select>
+    <input style="margin-top:10px;" class="w3-input w3-border" type="text" placeholder="Search Title or Author ..." name="input" required>
+    <button type="submit" style="margin-top:10px;" class="w3-button w3-block w3-black">Search</button>
+</form>
+
+<div style="width: 100%;">
+    <div style="width:33%;display:inline-block" class="w3-mobile">
+        <h2>Most Read</h2>
+        <div class="w3-section">
+            <img class="mySlides1" src="~/images/leyla.jpg">
+            <img class="mySlides1" src="~/images/hayvan.jpg">
+            <img class="mySlides1" src="~/images/otomatik.jpg">
+        </div>
+    </div>
+    <div style="width:33%;display:inline-block" class="w3-mobile">
+        <h2>Top Rated</h2>
+        <div class="w3-section">
+            <img class="mySlides2" src="~/images/yuzuk.jpg">
+            <img class="mySlides2" src="~/images/witcher.jpg">
+            <img class="mySlides2" src="~/images/sapiens.jpg">
+        </div>
+    </div>
+    <div style="width:33%;display:inline-block" class="w3-mobile">
+        <h2>New Releases</h2>
+        <div class="w3-section">
+            <img class="mySlides3" src="~/images/sineklerintanrisi.jpg">
+            <img class="mySlides3" src="~/images/guliver.jpg">
+            <img class="mySlides3" src="~/images/tutunamayanlar.jpg">
+        </div>
+    </div>
+</div>
+
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides1");
+        var y = document.getElementsByClassName("mySlides2");
+        var z = document.getElementsByClassName("mySlides3");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+            y[i].style.display = "none";
+            z[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) { myIndex = 1 }
+        x[myIndex - 1].style.display = "block";
+        if (myIndex > x.length) { myIndex = 1 }
+        y[myIndex - 1].style.display = "block";
+        if (myIndex > x.length) { myIndex = 1 }
+        z[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+</script>

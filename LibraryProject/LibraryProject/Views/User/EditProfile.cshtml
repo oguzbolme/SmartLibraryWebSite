@@ -1,0 +1,39 @@
+﻿@model MultipleViewModel
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .font-style{
+        font-family:sans-serif;
+        font-weight:bold;
+        color:black;
+    }
+</style>
+
+<h1 class="font-style" style="text-align:center; margin-bottom:60px;">Edit Your Profile</h1>
+<form asp-controller="User" asp-action="EditProfilePost" style="margin-bottom:70px;margin-top:10px;" class="w3-container w3-card-4 w3-light-grey font-style">
+    <p>
+        <label>Name</label>
+        <input class="w3-input w3-border" name="name" type="text" value="@Model.user.name" required>
+    </p>
+    <p>
+        <label>Surname</label>
+        <input class="w3-input w3-border" name="surname" type="text" value="@Model.user.surname" required>
+    </p>
+    <p>
+        <label>E-Mail</label>
+        <input class="w3-input w3-border" name="email" type="text" value="@Model.user.email" required>
+    </p>
+    <p>
+        <label>Nick</label>
+        <input class="w3-input w3-border" name="nick" type="text" value="@Model.user.nick" required>
+    </p>
+    <p>
+        <label>Password</label>
+        <input class="w3-input w3-border" name="password" type="text" value="@Model.user.password" required>
+    </p>
+    <p><button type="submit" class="w3-button w3-block w3-black">Save</button></p>
+    <p id="saveMessage" style="display:none; text-align:center;">Your information has been successfully updated.</p>
+</form>

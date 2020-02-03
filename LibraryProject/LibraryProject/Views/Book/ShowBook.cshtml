@@ -1,0 +1,67 @@
+﻿@model MultipleViewModel
+@{
+    ViewData["Title"] = "SearchBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .font-style {
+        font-family: sans-serif;
+        font-weight: bold;
+        color: black;
+    }
+</style>
+
+<form asp-controller="Book" asp-action="SearchBook" method="post" style="margin:20px;padding:20px;" class="w3-container w3-light-grey w3-round font-style">
+    <select class="w3-select" name="type" required>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+    </select>
+    <input style="margin-top:10px;" class="w3-input w3-border" type="text" placeholder="Search Title or Author ..." name="input" required>
+    <button type="submit" style="margin-top:10px;" class="w3-button w3-block w3-black">Search</button>
+</form>
+
+<h1 style="text-align:center;">Search Results</h1> 
+
+<div id="bookCard" class="card mb-3" style="max-width: 55%; margin:auto; cursor:pointer;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="@Model.book.imageURL" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title">@Model.book.name</h2>
+        <p class="card-text">@Model.book.description</p>
+        <p class="card-text"><small class="text-muted">@Model.author.name @Model.author.surname</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="w3-container">
+    <div id="bookDetails" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px;">
+
+            <h1 style="text-align:center;">@Model.book.name</h1>
+
+            <p style="text-align:center">Category Name: @Model.book.categoryName</p>
+            <p style="text-align:center">Library Name: @Model.library.name</p>
+            <p style="text-align:center">Library Address: @Model.library.address</p>
+            <p style="text-align:center">Library Tel: @Model.library.tel</p>
+            <p style="text-align:center">Library E-Mail: @Model.library.email</p>
+
+            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                <button style="width:100%;" onclick="document.getElementById('bookDetails').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#bookCard").click(function () {
+            $("#bookDetails").css("display", "block");
+        });
+    });
+</script>

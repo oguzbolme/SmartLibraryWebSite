@@ -1,0 +1,42 @@
+﻿@model MultipleViewModel
+@{
+    ViewData["Title"] = "ShowBooks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .font-style {
+        font-family: sans-serif;
+        font-weight: bold;
+        color: black;
+    }
+</style>
+
+<form asp-controller="Book" asp-action="SearchBook" method="post" style="margin:20px;padding:20px;" class="w3-container w3-light-grey w3-round font-style">
+    <select class="w3-select" name="type" required>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+    </select>
+    <input style="margin-top:10px;" class="w3-input w3-border" type="text" placeholder="Search Title or Author ..." name="input" required>
+    <button type="submit" style="margin-top:10px;" class="w3-button w3-block w3-black">Search</button>
+</form>
+
+<h1 style="text-align:center;">Search Results</h1>
+
+@foreach (var book in Model.Books)
+{
+    <div class="card mb-3" style="max-width: 55%; margin:auto; cursor:pointer;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="@book.imageURL" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">@book.name</h2>
+                    <p class="card-text">@book.description</p>
+                    <p class="card-text"><small class="text-muted">@Model.author.name @Model.author.surname</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

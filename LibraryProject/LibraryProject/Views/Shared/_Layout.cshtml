@@ -1,0 +1,216 @@
+﻿@model MultipleViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/w3/w3.css" />
+    <link rel="stylesheet" href="~/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="~/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/script.js"></script>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+</head>
+<body class="font-style">
+    <header>
+        <div class="w3-bar w3-light-grey w3-border">
+            <a style="width:20%" href="/Home" class="w3-bar-item w3-button w3-mobile"><i class="fa fa-home"></i> Library of Manisa</a>
+            <a id="isbnButton" style="width:20%" href="#EBooks" class="w3-bar-item w3-button w3-mobile"><i class="fa fa-book"></i> E-Books</a>
+            <a style="width:20%" href="#Contact" class="w3-bar-item w3-button w3-mobile" id="contactButton"><i class="fa fa-phone"></i> Contact</a>
+            <a style="width:20%" href="/Home/AboutUs" class="w3-bar-item w3-button w3-mobile"><i class="fa fa-info-circle"></i> About Us</a>
+            <div id="dropdown" style="width:20%;" class="w3-bar-item w3-button w3-mobile">
+                <a style="width:100%;" href="#Login" class="w3-dropdown-hover" id="loginButton"><i class="fa fa-user"></i> @Model.user.name @Model.user.surname</a>
+                <div style="margin-top:30px;" class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a asp-controller="User" asp-action="EditProfile" class="w3-bar-item w3-button"><i class="fa fa-edit"></i> Edit Profile</a>
+                    <a asp-controller="User" asp-action="Logout" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div style="margin:20px;">
+        @RenderBody()
+    </div>
+    <footer style="text-align:center;">
+        Copyright © 1999-2020 Gencizbiz
+    </footer>
+
+    <div class="w3-container">
+        <div id="contactModal" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                <form class="w3-container" method="post" asp-controller="User" asp-action="Contact">
+                    <div class="w3-section">
+                        <label><b>Subject</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Subject" name="subject" required>
+                        <label><b>Your Message</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Message" name="message" required>
+                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Send</button>
+                    </div>
+                </form>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('contactModal').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container">
+        <div id="loginModal" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+                <form class="w3-container" method="post" asp-controller="User" asp-action="Login">
+                    <div class="w3-section">
+                        <label><b>Username</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="nick" required>
+                        <label><b>Password</b></label>
+                        <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" required>
+                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
+                        <a style="display:none;" id="wrong">Your Nick or Password is Incorrect, Please Try Again !</a>
+                        <a id="goRegister" class="w3-margin-top" href="#Register"> Register</a>
+                    </div>
+                </form>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('loginModal').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                    <span class="w3-right w3-padding"><a href="#">Forgot password?</a></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container">
+        <div id="registerModal" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                <form class="w3-container" method="post" asp-controller="User" asp-action="Register">
+                    <div class="w3-section">
+                        <label><b>Name</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Name" name="name" required>
+                        <label><b>Surname</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Surname" name="surname" required>
+                        <label><b>E-Mail</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter E-Mail" name="email" required>
+                        <label><b>Nick</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Nick" name="nick" required>
+                        <label><b>Password</b></label>
+                        <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" required>
+                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Register</button>
+                    </div>
+                </form>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('registerModal').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container">
+        <div id="isbnModal" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+                <form class="w3-container" method="post" asp-controller="Book" asp-action="SendIsbnNo">
+                    <div class="w3-section">
+                        <label><b>ISBN NO</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter ISBN NO" name="isbnno" required>
+                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Search</button>
+                    </div>
+                </form>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('isbnModal').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container">
+        <div id="errorModal" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+                <h1 style="text-align:center;">@TempData["message"]</h1>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('errorModal').style.display='none'" type="button" class="w3-button w3-green" style="width:100%">Ok</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#contactButton").click(function () {
+                $("#contactModal").css("display", "block");
+            });
+        });
+
+        $(document).ready(function () {
+            @if (TempData["message"]!=null)
+        {
+            <text>
+            $(document).ready(function () {
+                $("#errorModal").css("display", "block");
+            });
+            </text>
+        }
+        });
+
+        $(document).ready(function () {
+            $("#loginButton").click(function () {
+                if ("@Model.user.name" == " Login")
+                {
+                        $("#loginModal").css("display", "block");
+                }
+                else
+                {
+                        $("#loginModal").css("display", "none");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $("#goRegister").click(function () {
+                $("#registerModal").css("display", "block");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#isbnButton").click(function () {
+                $("#isbnModal").css("display", "block");
+            });
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/User/Login",
+            success: function (result) {
+                $(document).ready(function () {
+                    if ("@Model.user.name" == " Login") {
+                        $("#dropdown").removeClass("w3-dropdown-hover");
+                    }
+                    else {
+                        $("#dropdown").addClass("w3-dropdown-hover");
+                    }
+                });
+            },
+            error: function (req, status, error) {
+                // bizde yanlış olmaz
+            }
+        });
+    </script>
+
+    <style>
+        .font-style {
+            font-family: sans-serif;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+</body>
+</html>
